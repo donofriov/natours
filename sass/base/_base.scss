@@ -1,0 +1,59 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    /* forces box-sizing to pass down styles
+       children elements will inherit box-sizing
+       styles, by default these are not inherited
+     */
+    box-sizing: inherit;
+}
+
+html {
+    /* root font size (for rem conversion)
+       setting to 10 makes it easy to covert
+       all pixels because you just have to move
+       the decimal vs doing actual calculations
+
+       this should be done in percentage vs pixels
+       so that browser zoom in/out still works
+
+       10px/16px(root font size) = .625 = 62.5%
+
+       more of an overall setting vs typography
+    */
+    font-size: 62.5%;
+
+    // This is unnecessary since tab-port is the same size
+
+    @include respond(big-desktop) {
+        font-size: 68.75%; //1rem = 11px, 12/16
+    }
+
+    @include respond(tab-land) {
+        font-size: 56.25%; //1rem = 9px
+    }
+
+    @include respond(tab-port) {
+        font-size: 50%; //1rem = 8px so 8px/16px = 50%
+    }
+
+}
+
+body {
+    /* now all children of the body can inherit this style */
+    box-sizing: border-box;
+    /* was padding: 30px; */
+    padding: 3rem;
+
+    @include respond(tab-port) {
+        padding: 0;
+    }
+
+}
+
+::selection {
+    background-color: $color-primary;
+    color: $color-white;
+}
